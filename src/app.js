@@ -21,7 +21,7 @@ function generateToken(user){
 }
 
 /*
-This function Auntheticates users first, if access is granted, a token for the user
+This function Autheticates users first, if access is granted, a token for the user
 is then generated which would be used to access the protected route.
 */
 function isLoggedIn(user){
@@ -71,11 +71,12 @@ app.post('/login', (req, res) =>{
 
 });
 
-// Protected route endpoint
+// Protected endpoint
 app.get('/protected', authenticateToken, (req, res) =>{
     res.status(200).send(`<h1>Hey ${req.user.username}, you are successfully authenticated! </h1>`);
 });
 
+// root endpoint
 app.get('/', (req, res) => {
     res.status(200).send('<h1>Hey, Welcome to our API endpoint</h1>');
 });
