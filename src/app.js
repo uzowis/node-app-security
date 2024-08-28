@@ -183,13 +183,25 @@ app.get('/auth/google/callback', passport.authenticate('google', {
     });
 
 app.get('/secret', checkLoggedIn, (req, res)=>{
-    res.status(200).send('Hey, Welcome to your data vault, secret code is 002233!');
+    res.status(200).send(`<h2> Hey, Welcome to your data vault,
+         secret code is 002233! </h2>
+         </b> 
+         <p><a href='auth/logout'>Sign Out</a> <a href='/'>Home</a></p>
+         `);
 });
 
 app.get('/failure', (req, res)=>{
     res.status(401).send('Login Failed!');
 });
 
+app.get('/auth/logout', (req, res, next)=>{
+    req.logout((err)=>{
+        if(err){
+            return next(err);
+        }
+        res.redirect('/');
+    });// this clears the req.user session thereby logging the user out
+});
 
 
 
